@@ -17,11 +17,11 @@ class Movie < ActiveRecord::Base
         return @movies
     end
 
-    def self.sort_by_col(col)
+    def self.sort_by_col(col, movies)
         if col 
-            @movies = Movie.all.order(col)
+            @movies = movies.order(col)
         else  
-            @movies = Movie.all
+            @movies = movies
         end 
         return @movies
     end

@@ -7,12 +7,13 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.sort_by_col(params[:sort_by]) if params[:sort_by]
-    @sort_by = params[:sort_by]
     @movies = Movie.with_ratings(params[:ratings])
+    @movies = Movie.sort_by_col(params[:sort_by], @movies) if params[:sort_by]
+    @sort_by = params[:sort_by]
     @all_ratings = Movie.all_ratings
     # set default to empty
     @ratings_to_show = []
+    @ratings_to_show = params[:ratings].keys if params[:ratings]
     puts(params)
     # puts params[:ratings]
     # if_empty_key = Movie.with_ratings(params[:ratings])
